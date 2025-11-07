@@ -72,7 +72,7 @@ def displayMenu():
 def level_intro(level):
     frame_2.grid_forget()
 
-    global frame_3
+    global frame_3      
     frame_3 = Frame(root, width=950, height=530)
     frame_3.grid(row=0, column=0)
 
@@ -134,7 +134,7 @@ def select_level(level):
     score_label.place(x=400, y=400)
     display_question()  # Call function to display questions
 
-def randInt():
+def randInt():   # Minimal help is taken from ChatGPT
     if Level == "Easy":
         return randint(1,9)
     elif Level == "Moderate":
