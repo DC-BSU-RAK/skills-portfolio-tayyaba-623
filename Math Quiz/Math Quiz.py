@@ -18,22 +18,22 @@ Level = "Easy"
 user_answer = StringVar()
 # Adding background music
 pygame.mixer.init()
-pygame.mixer.music.load("Math Quiz\bg_music.mp3")    # Background music idea from youtube video (https://youtube.com/shorts/4s-3l-e3ONc?si=FoMeOMSy9V7Mnxzc)
+pygame.mixer.music.load("Math Quiz/bg_music.mp3")    # Background music idea from youtube video (https://youtube.com/shorts/4s-3l-e3ONc?si=FoMeOMSy9V7Mnxzc)
 pygame.mixer.music.play(loops=1)
 
-# Function to play the sound for correct and wrong answer
+# Function to play the sound for correct and wrong answer 
 def bg_music(user_input):
    pygame.mixer.music.stop()
    if user_input == "Correct":
-       pygame.mixer.music.load("Math Quiz\success.mp3")
+       pygame.mixer.music.load("Math Quiz/success.mp3")
        pygame.mixer.music.play()
    else:
-       pygame.mixer.music.load("Math Quiz\wrong_answer.mp3")  
+       pygame.mixer.music.load("Math Quiz/wrong_answer.mp3")  
        pygame.mixer.music.play()
 
 # Function to replay the background music 
 def resume_backgroun_music():
-    pygame.mixer.music.load("Math Quiz\bg_music.mp3")
+    pygame.mixer.music.load("Math Quiz/bg_music.mp3")
     pygame.mixer.music.play(loops=-1)    
 
 # Frame1 for the front page
@@ -44,7 +44,7 @@ def frame1():
 
    lblVideo = Label(frame_1)
    lblVideo.grid(row=0, column=0, columnspan=2)
-   player = tkvideo("Math Quiz\Front_video.mp4", lblVideo, loop=1, size=(960,540))
+   player = tkvideo("Math Quiz/Front_video.mp4", lblVideo, loop=1, size=(960,540))
    player.play()
 
    Start_button = Button(frame_1, text="Start Quiz", font=("Arial", 12, "bold"), height=3, width=10, bg="orange", command=displayMenu)
@@ -59,7 +59,7 @@ def displayMenu():
 
    lblVideo = Label(frame_2)
    lblVideo.grid(row=0, column=0, columnspan=2)
-   player = tkvideo("Math Quiz\Menu.mp4", lblVideo, loop=1, size=(960,540))
+   player = tkvideo("Math Quiz/Menu.mp4", lblVideo, loop=1, size=(960,540))
    player.play()
 
    # Display title and level buttons
@@ -78,7 +78,7 @@ def level_intro(level):
 
     lblVideo = Label(frame_3)
     lblVideo.grid(row=0, column=0, columnspan=2)
-    player = tkvideo("Math Quiz\intro.mp4", lblVideo, loop=1, size=(960,540))
+    player = tkvideo("Math Quiz/intro.mp4", lblVideo, loop=1, size=(960,540))
     player.play()
     
     if level == "Easy":
@@ -108,7 +108,7 @@ def select_level(level):
     
     lblVideo = Label(frame_4)
     lblVideo.place(x=0, y=0, relwidth=1, relheight=1)
-    player = tkvideo("Math Quiz\Menu.mp4", lblVideo, loop=1, size=(960,540))
+    player = tkvideo("Math Quiz/Menu.mp4", lblVideo, loop=1, size=(960,540))
     player.play()
 
     # Background box of the Quiz screen
