@@ -50,8 +50,8 @@ def display_info(window, students):
 
     # Add headings in table
     for column in heading_columns:
-        record_table.heading(column, text=column)
-        record_table.column(column, width=150)
+        record_table.heading(column, text=column, anchor="center")
+        record_table.column(column, width=150, anchor="center")
     
     # Insert student information into the table
     for record in students:
@@ -200,8 +200,8 @@ def delete_student_record():
     record_table.grid(row=0, column=0, pady=20, columnspan=2)
 
     for column in heading_columns:
-        record_table.heading(column, text=column)
-        record_table.column(column, width=150)
+        record_table.heading(column, text=column, anchor="center")
+        record_table.column(column, width=150, anchor="center")
 
     for record in students:
         total_coursework = record[2] + record[3] + record[4]
@@ -252,8 +252,8 @@ def update_student_record():
     record_table.grid(row=0, column=0, pady=20, columnspan=2)
 
     for column in heading_columns:
-        record_table.heading(column, text=column)
-        record_table.column(column, width=150)
+        record_table.heading(column, text=column, anchor="center")
+        record_table.column(column, width=150, anchor="center")
 
     for record in students:
         total_coursework = record[2] + record[3] + record[4]
