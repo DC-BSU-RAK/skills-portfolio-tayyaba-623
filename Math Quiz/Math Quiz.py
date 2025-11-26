@@ -19,7 +19,7 @@ Level = "Easy"
 user_answer = StringVar()
 # Adding background music
 pygame.mixer.init()
-pygame.mixer.music.load("Math Quiz/bg_music.mp3")    # Background music idea from youtube video (https://youtube.com/shorts/4s-3l-e3ONc?si=FoMeOMSy9V7Mnxzc)
+pygame.mixer.music.load("Math Quiz/bg_music.mp3")    # Background music inspired by a youtube video (https://youtube.com/shorts/4s-3l-e3ONc?si=FoMeOMSy9V7Mnxzc)
 pygame.mixer.music.play(loops=1)
 
 # Play sound effects for correct and incorrect answers
