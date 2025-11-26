@@ -7,12 +7,13 @@ import pygame
 root = Tk()
 root.geometry("950x530")
 root.title("Math Quiz")
+root.iconbitmap("Math Quiz/icon.ico")
 
 Question = ""
-answer = 0
-Final_score = 0
-Total_attempt = 0
-Question_count = 0
+answer = 0   # Store the answer
+Final_score = 0   # Keep track of final score
+Total_attempt = 0     # Keep track of  total attempts
+Question_count = 0     # Number of questions 
 Level = "Easy"
 
 user_answer = StringVar()
@@ -21,7 +22,7 @@ pygame.mixer.init()
 pygame.mixer.music.load("Math Quiz/bg_music.mp3")    # Background music idea from youtube video (https://youtube.com/shorts/4s-3l-e3ONc?si=FoMeOMSy9V7Mnxzc)
 pygame.mixer.music.play(loops=1)
 
-# Function to play the sound for correct and wrong answer 
+# Play sound effects for correct and incorrect answers
 def bg_music(user_input):
    pygame.mixer.music.stop()
    if user_input == "Correct":
@@ -32,14 +33,14 @@ def bg_music(user_input):
        pygame.mixer.music.play()
 
 # Function to replay the background music 
-def resume_backgroun_music():
+def resume_background_music():
     pygame.mixer.music.load("Math Quiz/bg_music.mp3")
     pygame.mixer.music.play(loops=-1)    
 
 # Frame1 for the front page
 def frame1():
    global frame_1
-   frame_1 = Frame(root, width=950, height=530) # Height and width of the frame1
+   frame_1 = Frame(root, width=950, height=530) 
    frame_1.grid(row=0, column=0)
 
    lblVideo = Label(frame_1)
@@ -51,7 +52,7 @@ def frame1():
    Start_button.place(relx=0.5, rely=0.64, anchor="center")
 
 def displayMenu():
-   frame_1.grid_forget()  # Hiding the frame1
+   frame_1.grid_forget()  # Hide frame1
 
    global frame_2
    frame_2 = Frame(root, width=950, height=530)
@@ -68,7 +69,7 @@ def displayMenu():
    Button(frame_2, text="Moderate", bg="orange", font=("Arial", 12, "bold"), command=lambda: level_intro("Moderate"), width=15, height=3).place(relx=0.5, rely=0.55, anchor="center")
    Button(frame_2, text="Advanced", bg="orange", font=("Arial", 12, "bold"), command=lambda: level_intro("Advanced"), width=15, height=3).place(relx=0.5, rely=0.7, anchor="center")
 
-# Frame 3 for the level instructions
+# Level instructions
 def level_intro(level):
     frame_2.grid_forget()
 
@@ -82,11 +83,11 @@ def level_intro(level):
     player.play()
     
     if level == "Easy":
-       Level_intro = "In this level, you will get single-digit questions. You have two attempts for each questions. Answer correctly on the first try to earn 10 points. If you get it right on the second try, you will receive 5 points"
+       Level_intro = "In this level, you will get single-digit questions. You have two attempts for each question. Answer correctly on the first try to earn 10 points. If you get it right on the second try, you will receive 5 points"
     elif level == "Moderate":
-        Level_intro = "In this level, you will get two-digit questions. You have two attempts for each questions. Answer correctly on the first try to earn 10 points. If you get it right on the second try, you will receive 5 points"
+        Level_intro = "In this level, you will get two-digit questions. You have two attempts for each question. Answer correctly on the first try to earn 10 points. If you get it right on the second try, you will receive 5 points"
     else:    
-        Level_intro = "In this level, you will get four-digit questions. You have two attempts for each questions. Answer correctly on the first try to earn 10 points. If you get it right on the second try, you will receive 5 points"
+        Level_intro = "In this level, you will get four-digit questions. You have two attempts for each question. Answer correctly on the first try to earn 10 points. If you get it right on the second try, you will receive 5 points"
 
     intro_box = LabelFrame(frame_3, text=f"{level} Instructions", font=("Verdana", 12, "bold"), bg="lemon chiffon", fg="black", bd=3, relief="ridge", padx=10, pady=10)
     intro_box.place(relx=0.5, rely=0.5, anchor="center", width=550, height=300)
@@ -136,11 +137,11 @@ def select_level(level):
 
 def randInt():   # Minimal help is taken from ChatGPT
     if Level == "Easy":
-        return randint(1,9)
+        return randint(1,9)   # Generate random single-digit number
     elif Level == "Moderate":
-        return randint(10, 99)
+        return randint(10, 99)  # Generate random two-digit number
     else:
-        return randint(1000, 9999)
+        return randint(1000, 9999)    # Generate random four-digit number
     
 def decideoperation():
     return choice(["-", "+", "*", "/"])
@@ -148,24 +149,25 @@ def decideoperation():
 def display_question():
     global number_1, number_2, operation, Final_score, answer, Total_attempt, Question_count, question_number_label
 
-    Total_attempt = 1
-    user_answer.set("")
-    Question_count +=1
+    Total_attempt = 1  # Reset attempts
+    user_answer.set("") # Reset input
+    Question_count +=1   # Proceed to the next question
 
     score_label.config(text=f"Final score: {Final_score}")
+    # Display final score and grade after completing 10 questions
     if Question_count > 10:
       Grade = grade(Final_score)
-      messagebox.showinfo("Great quiz completed", f"Final score: {Final_score} /100 \nYour garde is: {Grade}") # Display result after completing 10 questions
+      messagebox.showinfo("Great quiz completed", f"Final score: {Final_score} /100 \nYour grade is: {Grade}") # Display result after completing 10 questions
       answer = messagebox.askyesno("Game completed", "Do you want to replay the game?")
       if answer:
-          replay_game() # Call function to replay the game
-          frame_4.grid_forget()   
-          displayMenu()   # Display the level screen 
+          replay_game()             # Call function to replay the game
+          frame_4.grid_forget()     # Hide quiz frame
+          displayMenu()             # Display the menu screen 
       else:
          root.destroy()
       return
     
-    # Generating random questions
+    # Generate random questions
     number_1 = randInt()
     number_2 = randInt()
     operation = decideoperation()
@@ -180,26 +182,26 @@ def display_question():
         answer = number_1 / number_2
        
     Question = f"{number_1} {operation} {number_2} = ?"
-    question_label.config(text=Question)
-    question_number_label.config(text=f"Question: {Question_count}/10")
-    score_label.config(text=f"Final score: {Final_score}")
-
-# Function to check user answer
+    question_label.config(text=Question)                   # Display question
+    question_number_label.config(text=f"Question: {Question_count}/10")    # Update question number
+    score_label.config(text=f"Final score: {Final_score}")       # Update final score
+ 
+# Check user answer
 def isCorrect():
     global Final_score, Total_attempt, question_number_label
     
     if float(user_answer.get()) == answer:
         if Total_attempt == 1:
             Final_score += 10
-            bg_music("Correct")
-            messagebox.showinfo("Correct!", "Correct answer +10 points")  # The message box was created with the help of a class explanation
-            resume_backgroun_music()
-            display_question()
+            bg_music("Correct")     # Play sound for the correct answer
+            messagebox.showinfo("Correct!", "Correct answer +10 points")  
+            resume_background_music()      # Resume background music after message box
+            display_question()    # Call function to display next question 
         else:
            Final_score +=5
            bg_music("Correct")
            messagebox.showinfo("Correct!", "Correct answer +5 points")
-           resume_backgroun_music()
+           resume_background_music()
            display_question()
 
     else:     
@@ -207,11 +209,11 @@ def isCorrect():
              bg_music("Wrong")
              messagebox.showwarning("Incorrect", "Incorrect answer. Try again")
              Total_attempt = 2
-             resume_backgroun_music()
+             resume_background_music()
          else:
             bg_music("Wrong")
             messagebox.showerror("Incorrect", f"Correct answer is: {answer}")
-            resume_backgroun_music()
+            resume_background_music()
             display_question()
 
 # Function to check grades
@@ -220,7 +222,7 @@ def grade(score):
          return "A+"
     elif score >= 82:
         return "A"
-    elif score >= 72:
+    elif score >= 72: 
         return "B+"
     elif score >= 62:
         return  "B"
