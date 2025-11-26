@@ -10,8 +10,8 @@ root.iconbitmap("Exercise 3/icon.ico")
 
 def students_record():
     Students = []
-    with open("Exercise 3/studentMarks.txt", "r") as file: # Open txt and read its contents
-        lines = file.readlines()[1:]    # Skip the first line of the txt file
+    with open("Exercise 3/studentMarks.txt", "r") as file: # Open the text file and read its contents
+        lines = file.readlines()[1:]    # Skip the first line of the text file
         for Students_record in lines:
             Students_record = Students_record.strip()
             if Students_record == "":
@@ -22,8 +22,8 @@ def students_record():
             # Convert course work mark to integer
             course_mark1, course_mark2, course_mark3 = map(int, info[2:5])
             Exam_mark = int(info[5])  # Convert exam mark to integer
-            total_mark = course_mark1 + course_mark2 + course_mark3
-            Percentage = (total_mark + Exam_mark) / 160 * 100
+            total_mark = course_mark1 + course_mark2 + course_mark3   # Calculate total mark
+            Percentage = (total_mark + Exam_mark) / 160 * 100  # Calculate percentage
             Grade = grade(Percentage)
             # Store data in tuples
             Students.append((Number, Name, course_mark1, course_mark2, course_mark3, Exam_mark, Percentage, Grade))
@@ -67,7 +67,7 @@ def all_student_records():
     window.configure(bg='sky blue')
     students = students_record()
     display_info(window, students)
-    total_students = len(students) # Calculate the total number of students
+    total_students = len(students) # Get the total number of students
     average_percentage = sum(s[6] for s in students) / total_students
     Label(window, text=f"Total students: {total_students} | Average %: {average_percentage:.2f}%", bg="sky blue", font=("Arial", 12, "bold")).place(x=300, y=370)
 
@@ -96,13 +96,13 @@ def individual_student_records():
             record.title("Individual student record")
             record.geometry("900x250")
             record.configure(bg='sky blue')
-            display_info(record, selected_student) # Calling function to display student information
+            display_info(record, selected_student) # Call function to display student information
     Button(window, text="Show record", bg="#1b294a", fg="white", font=("Arial", 12, "bold"), width=10, command=display_record).place(x=90, y=140)
 
 # Function to display highest score student 
 def highest_score():
     students = students_record()
-    Highest_score = max((s[2] + s[3] + s[4] + s[5]) for s in students)  # Find the highest overall score among all students
+    Highest_score = max((s[2] + s[3] + s[4] + s[5]) for s in students)  # Find the highest total score among all students
     top_students = [s for s in students if (s[2] + s[3] + s[4] + s[5]) == Highest_score]  # Find all students with the highest marks
     record =  Toplevel(root)
     record.title("Highest score")
@@ -114,7 +114,7 @@ def highest_score():
 # Function to display lowest score student
 def lowest_score():
     students = students_record()
-    Lowest_score = min((s[2] + s[3] + s[4] + s[5]) for s in students)   # Find the lowest overall score among all students
+    Lowest_score = min((s[2] + s[3] + s[4] + s[5]) for s in students)   # Find the lowest total score among all students
     Lowest_students = [s for s in students if (s[2] + s[3] + s[4] + s[5]) == Lowest_score]  # Find all students with the lowest marks
     record =  Toplevel(root)
     record.title("Lowest score")
@@ -132,7 +132,7 @@ def add_student_record():
     record.iconbitmap("Exercise 3/icon.ico")
     record.configure(bg='sky blue')
 
-    Label(record, text="Add student details", bg="sky blue", font=("Arial", 12, "bold")).place(x=140, y=30)
+    Label(record, text="Add student details", bg="sky blue", font=("Arial", 12, "bold")).place(x=170, y=30)
 
     Student_number = Label(record, text="Student Number", bg="sky blue", font=("Arial", 12, "bold"))
     Student_number.place(x=30, y=80)
@@ -180,7 +180,7 @@ def save_student_record():
         record.focus_force()
         return
     
-    # Add new records to the txt file
+    # Add new student record to the text file
     with open("Exercise 3/studentMarks.txt", "a") as file:
         file.write(f"\n{student_number},{student_name},{coursework_mark1},{coursework_mark2},{coursework_mark3},{exam_mark}")
     messagebox.showinfo("Success", "Student record has been added.")
