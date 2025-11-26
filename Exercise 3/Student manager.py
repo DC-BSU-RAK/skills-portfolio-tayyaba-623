@@ -62,7 +62,7 @@ def display_info(window, students):
 def all_student_records():
     window = Toplevel(root)  # Create a new window to display all student records
     window.title("All students record")
-    window.geometry("950x450")
+    window.geometry("900x450")
     window.iconbitmap("Exercise 3/icon.ico")
     window.configure(bg='sky blue')
     students = students_record()
@@ -354,7 +354,7 @@ def update_student_record():
 def sort_student_records():
     window =  Toplevel(root)
     window.title("Sort student record")
-    window.geometry("400x250")
+    window.geometry("300x250")
     window.iconbitmap("Exercise 3/icon.ico")
     window.configure(bg='sky blue')
     
@@ -362,11 +362,11 @@ def sort_student_records():
 
     Label(window, text="Sort by:", bg="sky blue", font=("Arial", 12)).place(x=50, y=50)
     sort_field = ttk.Combobox(window, values=["Number", "Name", "Course mark 1", "Course mark 2", "Course mark 3", "Exam", "Percentage", "Grade"])
-    sort_field.place(x=180, y=50)
+    sort_field.place(x=130, y=53)
 
     Label(window, text="Order:", bg="sky blue", font=("Arial", 12)).place(x=50, y=100)
     sort_order = ttk.Combobox(window, values=["Ascending order", "Descending order"])
-    sort_order.place(x=180, y=100)
+    sort_order.place(x=130, y=105)
 
     def perform_sort():
         field = sort_field.get()
@@ -400,7 +400,7 @@ def sort_student_records():
         record_window.configure(bg='sky blue')
         display_info(record_window, sorted_students)
 
-    Button(window, text="Sort", bg="#1b294a", fg="white", font=("Arial", 12, "bold"), width=15, command=perform_sort).place(x=120, y=170)
+    Button(window, text="Sort", bg="#1b294a", fg="white", font=("Arial", 12, "bold"), width=15, command=perform_sort).place(x=70, y=170)
 
 
 # Create buttons for the menu
